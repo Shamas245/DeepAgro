@@ -2,6 +2,9 @@
 
 class BestCropRecommendationAgent:
     def recommend_crops(self, summarized_data):
-        # For demo purposes, returns a fixed list of crops.
+        """
+        Analyzes the summarized data and returns a list of recommended crops.
+        Here, a fixed list is returned for demonstration.
+        """
         recommended_crops = ["Wheat", "Corn", "Soybean", "Rice", "Barley"]
         return recommended_crops

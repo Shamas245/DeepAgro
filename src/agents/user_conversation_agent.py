@@ -5,6 +5,9 @@ class UserConversationAgent:
         self.user_data = {}
 
     def collect_user_input(self, form_data):
-        """Collects user input and returns it as a dictionary."""
+        """
+        Collects user input data from a dictionary (e.g., from a form)
+        and stores it.
+        """
         self.user_data = form_data
         return self.user_data

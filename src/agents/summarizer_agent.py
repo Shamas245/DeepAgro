@@ -5,7 +5,9 @@ class SummarizerAgent:
         self.data = {}
 
     def aggregate_data(self, user_data, api_data):
-        """Aggregates user and API data into one dictionary."""
+        """
+        Aggregates data from user inputs and API calls into a single dictionary.
+        """
         self.data = {
             "user": user_data,
             "api": api_data
