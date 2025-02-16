@@ -1,49 +1,66 @@
-# api_calling_agent.py
+from typing import Dict, Any
+from camel.agents import ChatAgent
+from camel.typing import TaskType, RoleType
+from config import BaseConfig
+import aiohttp
 
-import requests
-import random
-
-class APICallingAgent:
+class APICallingAgent(ChatAgent):
     def __init__(self):
-        # Replace these with your actual API keys if needed.
-        self.world_bank_api_key = "YOUR_WORLD_BANK_API_KEY"
-        self.trading_economics_api_key = "YOUR_TRADING_ECONOMICS_API_KEY"
-        self.weather_api_key = "YOUR_WEATHER_API_KEY"
-        self.climate_api_key = "YOUR_CLIMATE_API_KEY"
+        system_message = """You are an Agricultural API Calling Agent responsible for fetching and processing external data.
 
-    def fetch_economic_data(self, location):
-        """
-        Fetches economic data based on location.
-        (Replace dummy data with real API calls as needed.)
-        """
-        economic_data = {
-            "average_income": random.uniform(2000, 5000),
-            "crop_prices": {
-                "Wheat": random.uniform(2.0, 5.0),
-                "Corn": random.uniform(1.5, 4.0),
-                "Soybean": random.uniform(3.0, 6.0),
-                "Rice": random.uniform(2.5, 5.5),
-                "Barley": random.uniform(2.0, 4.5)
+Your core responsibilities:
+1. Fetch economic data:
+   - Crop market prices
+   - Agricultural commodity trends
+   - Economic indicators
+   - World Bank agricultural data
+   - Trading Economics agricultural metrics
+
+2. Fetch environmental data:
+   - Weather forecasts
+   - Climate patterns
+   - Soil conditions
+   - Water table information
+   - Environmental risks
+
+3. Data processing:
+   - Clean and structure API responses
+   - Handle API errors gracefully
+   - Ensure data consistency
+   - Format data for other agents
+
+You must maintain data accuracy and handle rate limits appropriately.
+Always validate API responses before passing data to other agents."""
+
+        super().__init__(
+            system_message=system_message,
+            task_type=TaskType.API,
+            role_type=RoleType.ASSISTANT,
+            model_config={
+                "temperature": BaseConfig.TEMPERATURE,
+                "max_tokens": BaseConfig.MAX_TOKENS
             }
-        }
-        return economic_data
-
-    def fetch_environmental_data(self, location):
-        """
-        Fetches environmental data based on location.
-        (Replace dummy data with real API calls as needed.)
-        """
-        environmental_data = {
-            "temperature": random.uniform(15, 35),
-            "rainfall": random.uniform(0, 200),
-            "humidity": random.uniform(30, 90)
-        }
-        return environmental_data
-
-    def get_all_api_data(self, location):
-        """
-        Combines economic and environmental data into a single dictionary.
-        """
-        economic_data = self.fetch_economic_data(location)
-        environmental_data = self.fetch_environmental_data(location)
-        return {"economic": economic_data, "environmental": environmental_data}
+        )
+        self.session = None
+    
+    async def initialize(self):
+        self.session = aiohttp.ClientSession()
+    
+    async def fetch_economic_data(self, location: str) -> Dict[str, Any]:
+        if not self.session:
+            await self.initialize()
+        
+        # Implement API calls to World Bank and Trading Economics
+        return {}
+    
+    async def fetch_weather_data(self, location: str) -> Dict[str, Any]:
+        if not self.session:
+            await self.initialize()
+        
+        # Implement weather API calls
+        return {}
+    
+    async def close(self):
+        if self.session:
+            await self.session.close()
+            
