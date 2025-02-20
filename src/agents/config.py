@@ -23,3 +23,10 @@ class DataSchema:
         "water_availability",
         "equipment"
     ]
+
+CONFIG: Dict[str, Any] = {
+    "required_fields": ["location", "budget", "soil_type", "equipment"],
+    "default_crops": ["cotton", "tomatoes", "almonds"],
+    "min_budget": 10000,
+    "supported_regions": ["California Central Valley", "Midwest", "Southeast"]
+}

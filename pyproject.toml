@@ -6,20 +6,23 @@ readme = "README.md"
 authors = [
     { name = "Tayyab Sajjad", email = "124726671+devtayyabsajjad@users.noreply.github.com" }
 ]
-requires-python = ">=3.8,<3.12"
+requires-python = ">=3.9, <3.12"
+
 dependencies = [
+    "camel-ai>=0.1.0,<0.2.0",
+    "nest-asyncio>=1.6.0",
     "numpy>=1.23.5,<2.0.0",
     "pillow>=11.1.0",
     "requests>=2.31.0",
     "streamlit>=1.42.0",
     "streamlit-lottie>=0.0.5",
-    
 ]
 
 [project.scripts]
 agents = "agents:main"
-dr_agent = "agents.dr_agent:dr_agent_text"
-jawad = "agents.jawad:main"
+test = "agents.tests.conversation_test:test"
+testing_llm="agents.testing_llm:main"
+test_main = "agents.main:main"
 
 [build-system]
 requires = ["hatchling"]
