@@ -53,4 +53,56 @@ DeepAgro is a sophisticated multi-agent system that leverages CAMEL AI and Googl
 
 ## Usage
 
+```python
+from agents.main import AgriculturalAdvisor
+
+# Initialize
+advisor = AgriculturalAdvisor(api_key="YOUR_API_KEY")
+
+# Test inputs
+responses = [
+    "My budget is $50,000",
+    "I'm located in California's Central Valley",
+    "The soil is clay loam and we have good water access",
+    "I have a tractor and basic farming equipment"
+]
+
+# Get recommendations
+results = advisor.process_user_input(responses)
+print(results)
+```
+
+## Project Structure
+```
+src/agents/
+├── main.py                      # Main orchestration
+├── user_conversation_agent.py    # User interaction
+├── api_calling_agent.py          # External data fetching
+├── summarizer_agent.py           # Data analysis
+├── best_crop_recommendation_agent.py # Crop suggestions
+├── planning_agent.py             # Plan generation
+└── tests/
+    └── test_agricultural_advisor.py # Test suite
+```
+
+## Testing
+Run the test suite:
+```bash
+pytest src/agents/tests/
+```
+
+Run type checking:
+```bash
+mypy --ignore-missing-imports src/agents/
+```
+
+## Notes
+This README provides:
+- A clear project overview
+- Installation instructions
+- Usage examples
+- Project structure details
+- Testing instructions
+
+Feel free to contribute and improve the project!
 
