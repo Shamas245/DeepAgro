@@ -96,6 +96,9 @@ Run type checking:
 mypy --ignore-missing-imports src/agents/
 ```
 
+## LICENCE
+This project is licensed under the MIT License.
+
 ## Notes
 This README provides:
 - A clear project overview
